@@ -1,0 +1,260 @@
+/* Variáveis de tema */
+:root {
+  --bg-image: url('../img/PaisagemDia1.png');
+  --text-color: #000;
+  --container-bg: rgba(255, 255, 255, 0.7);
+  --border-color: black;
+}
+
+/* Quando o botão (checkbox) estiver marcado, as variáveis mudam */
+body:has(#theme-toggle-check:checked) {
+  --bg-image: url('../img/PaisagemNoite2.png');
+  --text-color: #fff;
+  --container-bg: rgba(0, 0, 0, 0.6);
+  --border-color: white;
+}
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* CORREÇÃO DO FUNDO: Removido height: 100% que limitava a tela */
+html {
+  height: auto;
+}
+
+/* Fundo com imagem usando as variáveis */
+body {
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  /* ESTAS DUAS LINHAS RESOLVEM O ESPAÇO BRANCO */
+  background-attachment: fixed; /* A imagem fica parada enquanto o site rola */
+  min-height: 100vh;            /* Garante que o fundo tenha no mínimo a altura da tela */
+  
+  color: var(--text-color);
+  transition: 0.5s; 
+}
+
+header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr; 
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    grid-column: 2; 
+    text-align: center;
+}
+
+/* Container principal unificado */
+.todo-container {
+  width: 90%;
+  max-width: 900px;
+  min-height: 300px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: var(--container-bg);
+  border: 4px solid var(--border-color);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  transition: 0.4s;
+}
+
+/* Botões gerais do site */
+button {
+    background-color: white;
+    color: black;
+    border: 2px solid #102f5e;
+    padding: .3rem .6rem;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+}
+
+button:hover {
+    background-color: #0acaff;
+    color: white;
+}
+
+button i {
+    color: #102f5e;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+/* Botão de tema circular */
+#theme-toggle {
+    grid-column: 3;
+    justify-self: end; /* Garante que fique na direita dentro do grid */
+    cursor: pointer;
+    font-size: 1.2rem;
+    background-color: white;
+    border: 2px solid #102f5e;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+    margin-left: auto; 
+}
+
+/* Muda o ícone de Lua para Sol no modo escuro */
+body:has(#theme-toggle-check:checked) #theme-toggle::after {
+    content: "☀️";
+}
+body:has(#theme-toggle-check:checked) #theme-toggle {
+    content: ""; 
+    background-color: #333;
+    border-color: #fff;
+}
+
+input, select {
+   padding: 0.25rem 0.5rem;
+}
+
+.hide {
+    display: none;
+}
+
+/* Removido o border-bottom fixo do header para usar o HR de forma mais limpa */
+.todo-container header {
+    text-align: center;
+    padding: 0 1rem 1rem;
+}
+
+#todo-form p,
+#edit-form p {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+/* Linha divisória */
+hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+    width: 100%;
+}
+
+body:has(#theme-toggle-check:checked) hr {
+    border-top: 1px solid #fff; 
+}
+
+/* Container do formulário de busca */
+#search form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#search-input {
+    width: 250px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#eraser-button {
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border: 2px solid #102f5e;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-control {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Todo toolbar */
+#toolbar {
+    padding: 1rem;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between; /* Melhora o alinhamento entre busca e filtro */
+    align-items: center;
+}
+
+#toolbar h4{
+    margin-bottom: .5rem;
+}
+
+#search {
+    border-right: 1px solid #ddd;
+    padding-right: 1rem;
+    margin-right: 1rem;
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+}
+
+#search form {
+    display: flex;
+}
+
+#search input {
+    width: 100%;
+    margin-right: 0.3rem;
+}
+
+#filter {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#filter select {
+    flex: 1;
+}
+
+/*Todo List*/
+
+.todo {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
+    transition: .3s;
+}
+
+.todo h3 {
+    flex: 1;
+    font-size: 0.9rem;
+}
+
+.todo button {
+    margin-left: 0.4rem;
+}
+
+.done {
+    background-color: #395169;
+    }
+
+.done h3 {
+    color: #fff;
+    text-decoration: line-through;
+    font-style: italic;
+}
