@@ -1,56 +1,33 @@
 # Lembretes RF
 
-Aplicação de lista de tarefas com cadastro, login e lembretes privados por usuário. Projeto de estudo feito com HTML, CSS, JavaScript, Node.js, Express e MySQL.
+O Lembretes RF é um sistema de lembretes com cadastro e login. Cada usuário tem sua própria lista de tarefas.
 
 ## Funcionalidades
 
-- Criar conta e entrar com e-mail e senha.
-- Armazenar senhas usando hash.
+- Criar uma conta e entrar com e-mail e senha.
 - Criar, listar, editar, concluir e excluir lembretes.
 - Manter os lembretes separados por usuário.
+- Alternar entre os temas claro e escuro.
 
-## Requisitos
+## Tecnologias
 
-- Node.js e npm.
-- MySQL Server e MySQL Workbench.
+- **HTML** define as páginas e os formulários.
+- **CSS** controla a aparência do site e os temas.
+- **JavaScript** conecta a interface às rotas do servidor.
+- **Node.js e Express** fornecem a API e controlam o cadastro, o login e as tarefas.
+- **MySQL** armazena usuários e lembretes.
+- **bcryptjs** protege as senhas usando hash.
+- **express-session** mantém a sessão do usuário conectado.
 
-## Configuração
+## Organização dos arquivos
 
-1. No MySQL Workbench, abra e execute [`database/schema.sql`](database/schema.sql).
-2. Na pasta do projeto, instale as dependências:
-
-   ```powershell
-   npm install
-   ```
-
-3. Crie um arquivo chamado `.env` na raiz do projeto com estas variáveis e preencha os valores da sua máquina. Não envie `.env` ao GitHub.
-
-   ```env
-   DB_HOST=localhost
-   DB_USER=root
-   DB_PASSWORD=sua_senha_local_do_mysql
-   DB_NAME=tarefas_db
-   SESSION_SECRET=cole_a_chave_aleatoria_aqui
-   ```
-4. Gere uma chave de sessão local com:
-
-   ```powershell
-   node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
-   ```
-
-   Coloque o resultado em `SESSION_SECRET` no `.env`. Não compartilhe nem publique essa chave.
-5. Inicie o servidor:
-
-   ```powershell
-   npm start
-   ```
-
-6. Abra `http://localhost:3000/cadastro.html` para criar a primeira conta.
-
-## Variáveis locais
-
-O arquivo `.env` contém `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME` e `SESSION_SECRET`. Ele está ignorado pelo Git e não deve ser publicado.
-
-## Observação
-
-O armazenamento de sessão padrão do Express serve para desenvolvimento local. Para publicar a aplicação em produção, configure um armazenamento de sessões apropriado e credenciais próprias para o servidor.
+- `index.html`: página principal da lista de lembretes.
+- `cadastro.html`: formulário para criar uma conta.
+- `login.html`: formulário para entrar em uma conta.
+- `css/styles.css`: estilos das páginas, dos formulários e dos lembretes.
+- `js/scripts.js`: carregamento e operações dos lembretes na página principal.
+- `js/auth.js`: envio dos formulários de cadastro e login.
+- `server.js`: servidor Express, rotas da API, autenticação e acesso ao banco.
+- `database/schema.sql`: estrutura das tabelas MySQL e relação entre usuários e lembretes.
+- `package.json`: dependências usadas pelo projeto.
+- `.env`: configurações locais e credenciais; esse arquivo não é publicado no GitHub.
